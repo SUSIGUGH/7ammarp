@@ -7,7 +7,7 @@ pipeline{
                 sh 'pwd'
                 sh 'git clone -b master https://github.com/SUSIGUGH/7ammarp.git'
                 sh 'ls -ltr 7ammarp'
-                sh 'mkdir terraform'
+                sh 'mkdir terraform -p'
                 sh 'cp -r 7ammarp/terraform/*.tf terraform/'
             }
         }
