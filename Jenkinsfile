@@ -17,11 +17,18 @@ pipeline{
                 sh 'cd terraform && terraform init && terraform apply -auto-approve'
             }
         }
+
         
         stage('Docker Image Creation'){
             steps{
                 sh 'echo "Creating Docker Image"'
                 sh 'ls -ltr'
+            }
+        }
+
+      stage('Run PHP Docker Container'){
+            steps{
+                sh 'sudo docker run -dit --name=nginx01 -p8081:80 nginx'
             }
         }
         
