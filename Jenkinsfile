@@ -19,10 +19,12 @@ pipeline{
         }
 
         
-        stage('Docker Image Creation'){
+        stage('Docker Image Creation and Run'){
             steps{
                 sh 'echo "Creating Docker Image"'
-                sh 'ls -ltr'
+		sh 'cd 7ammarp/docker/mysql && sudo docker build -t susimysql .'
+		sh 'sudo docker run -dit --name mysql01 susimysql'
+                sh 'echo "Container created"'
             }
         }
 
