@@ -19,18 +19,20 @@ pipeline{
         }
 
         
-        stage('Docker Image Creation and Run'){
+        stage('MYSQL Docker Image Creation and Run'){
             steps{
                 sh 'echo "Creating Docker Image"'
 		sh 'cd 7ammarp/docker/mysql && sudo docker build -t susimysql .'
+		sh 'sudo docker stop mysql01 && sudo docker rm mysql01'
 		sh 'sudo docker run -dit --name mysql01 susimysql'
+		sh 'sudo docker ps | grep susimysql'
                 sh 'echo "Container created"'
             }
         }
 
-      stage('Run PHP Docker Container'){
+      stage('Mongodb'){
             steps{
-                sh 'sudo docker run -dit --name=nginx01 -p8081:80 nginx'
+                sh 'sudo docker run -dit --name=mongodb1 -p27017:27017 mongo'
             }
         }
         
