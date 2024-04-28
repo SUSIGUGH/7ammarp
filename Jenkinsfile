@@ -16,8 +16,8 @@ pipeline{
         
             stage('Node Application Image Creation'){
             steps{
-                sh 'cd 7ammarp/docker/node & docker build -t nodecust .'
-                sh 'docker run -dit --name=nodecust01 -p3000:3000 nodecust'
+                sh 'cd 7ammarp/docker/node & sudo docker build -t nodecust .'
+                sh 'sudo docker run -dit --name=nodecust01 -p3000:3000 nodecust'
             }
         }
         
