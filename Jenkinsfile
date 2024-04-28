@@ -12,34 +12,12 @@ pipeline{
             }
         }
         
-        stage('Terrafrom execution'){
-            steps{
-                sh 'cd terraform && terraform init && terraform apply -auto-approve'
-            }
-        }
 
         
-        stage('MYSQL Docker Image Creation and Run'){
+            stage('Node Application Image Creation'){
             steps{
-                sh 'echo "Creating Docker Image"'
-		sh 'cd 7ammarp/docker/mysql && sudo docker build -t susimysql .'
-		sh 'sudo docker stop mysql01 && sudo docker rm mysql01'
-		sh 'sudo docker run -dit --name mysql01 susimysql'
-		sh 'sudo docker ps | grep susimysql'
-                sh 'echo "Container created"'
-            }
-        }
-
-      stage('Mongodb'){
-            steps{
-                sh 'sudo docker run -dit --name=mongodb1 -p27017:27017 mongo'
-            }
-        }
-        
-            stage('Send Docker Image to Docker Hub'){
-            steps{
-                sh 'echo "Releasing to Docker Hub"'
-                sh 'ls -ltr'
+                sh 'cd 7ammarp/docker/node & docker build -t nodecust .'
+                sh 'docker run -dit --name=nodecust01 -p3000:3000 nodecust'
             }
         }
         
